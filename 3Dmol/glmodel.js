@@ -1569,7 +1569,12 @@ $3Dmol.GLModel = (function() {
             var amplitude = amplitude || 1;
             var numFrames = numFrames || 10; 
             numFrames--;
-            for (var i = 1; i <= numFrames; i++) {
+            frames = [];
+            for (var i = 0-numFrames; i <= numFrames; i++) {
+                if (i == 0) {
+                    frames.push(atoms);
+                    continue;
+                }
                 var newAtoms = [];
                 for (var j = 0; j < atoms.length; j++) {
                     var newVector = new $3Dmol.Vector3(
@@ -1590,7 +1595,7 @@ $3Dmol.GLModel = (function() {
                 }
                 frames.push(newAtoms);
             }
-            frames.unshift(atoms); //add 1st frame
+            // frames.unshift(atoms); //add 1st frame
         };
         
         // set default style and colors for atoms
